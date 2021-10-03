@@ -6,9 +6,9 @@ const ObjectId = require('mongodb').ObjectId
 async function query(filterBy) {
     try {
 
-        // const criteria = _buildCriteria(filterBy)
+        const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('stay')
-        var stays = await collection.find().toArray()
+        var stays = await collection.find(criteria).toArray()
         return stays
     } catch (err) {
         console.log(err);
@@ -19,8 +19,14 @@ async function query(filterBy) {
 
 function _buildCriteria(filterBy) {
     const criteria = {}
-    if (filterBy.name) {
-        criteria.name = { $regex: filterBy.name, $options: 'i' }
+    if (filterBy.location) {
+        criteria.location = { $regex: filterBy.location, $options: 'i' }
+    }
+    if (filterBy.assetType) {
+        criteria.assetType = { $regex: filterBy.assetType, $options: 'i' }
+    }
+    if (filterBy.amenities) {
+        criteria.amenities = { $regex: filterBy.amenitiesm, $options: 'i' }
     }
     return criteria
 }
