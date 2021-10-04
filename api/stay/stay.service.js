@@ -26,7 +26,13 @@ function _buildCriteria(filterBy) {
         criteria.assetType = { $regex: filterBy.assetType, $options: 'i' }
     }
     if (filterBy.amenities) {
-        criteria.amenities = { $regex: filterBy.amenitiesm, $options: 'i' }
+        criteria.amenities = { $regex: filterBy.amenities, $options: 'i' }
+    }
+    if (filterBy.uniqueStay) {
+        criteria.uniqueStay = JSON.parse(filterBy.uniqueStay)
+    }
+    if (filterBy.capacity) {
+        criteria.capacity = { $gt: +filterBy.capacity }
     }
     console.log(criteria)
     return criteria
