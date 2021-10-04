@@ -29,48 +29,48 @@ async function getStayById(req, res) {
     }
   }
   
-//   // POST (add stay)
-//   async function addStay(req, res) {
-//     try {
-//       const stay = req.body;
-//       const addedStay = await stayService.add(stay)
-//       res.json(addedStay)
-//     } catch (err) {
-//       logger.error('Failed to add stay', err)
-//       res.status(500).send({ err: 'Failed to add stay' })
-//     }
-//   }
+  // POST (add stay)
+  async function addStay(req, res) {
+    try {
+      const stay = req.body;
+      const addedStay = await stayService.add(stay)
+      res.json(addedStay)
+    } catch (err) {
+      logger.error('Failed to add stay', err)
+      res.status(500).send({ err: 'Failed to add stay' })
+    }
+  }
   
-//   // PUT (Update stay)
-//   async function updateStay(req, res) {
-//     try {
-//       const stay = req.body;
-//       const updatedStay = await stayService.update(stay)
-//       res.json(updatedStay)
-//     } catch (err) {
-//       logger.error('Failed to update stay', err)
-//       res.status(500).send({ err: 'Failed to update stay' })
+  // PUT (Update stay)
+  async function updateStay(req, res) {
+    try {
+      const stay = req.body;
+      const updatedStay = await stayService.update(stay)
+      res.json(updatedStay)
+    } catch (err) {
+      logger.error('Failed to update stay', err)
+      res.status(500).send({ err: 'Failed to update stay' })
   
-//     }
-//   }
+    }
+  }
   
-//   // DELETE (Remove stay)
-//   async function removeStay(req, res) {
-//     try {
-//       const stayId = req.params.id;
-//       const removedId = await stayService.remove(stayId)
-//       res.send(removedId)
-//     } catch (err) {
-//       logger.error('Failed to remove stay', err)
-//       res.status(500).send({ err: 'Failed to remove stay' })
-//     }
-//   }
+  // DELETE (Remove stay)
+  async function removeStay(req, res) {
+    try {
+      const stayId = req.params.id;
+      const removedId = await stayService.remove(stayId)
+      res.send(removedId)
+    } catch (err) {
+      logger.error('Failed to remove stay', err)
+      res.status(500).send({ err: 'Failed to remove stay' })
+    }
+  }
   
   module.exports = {
     getStays,
-    // getStayById,
-    // addStay,
-    // updateStay,
-    // removeStay
+    getStayById,
+    addStay,
+    updateStay,
+    removeStay
   }
   
