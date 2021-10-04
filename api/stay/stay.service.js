@@ -4,8 +4,8 @@ const ObjectId = require('mongodb').ObjectId
 
 
 async function query(filterBy) {
+    console.log(filterBy)
     try {
-
         const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('stay')
         var stays = await collection.find(criteria).toArray()
@@ -18,9 +18,9 @@ async function query(filterBy) {
 }
 
 function _buildCriteria(filterBy) {
-    const criteria = {}
+    let criteria = {}
     if (filterBy.location) {
-        criteria.location = { $regex: filterBy.location, $options: 'i' }
+        criteria = { 'loc.address': { $regex: filterBy.location, $options: 'i' } }
     }
     if (filterBy.assetType) {
         criteria.assetType = { $regex: filterBy.assetType, $options: 'i' }
@@ -28,6 +28,7 @@ function _buildCriteria(filterBy) {
     if (filterBy.amenities) {
         criteria.amenities = { $regex: filterBy.amenitiesm, $options: 'i' }
     }
+    console.log(criteria)
     return criteria
 }
 

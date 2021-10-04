@@ -5,6 +5,7 @@ const logger = require('../../services/logger.service.js')
 //get stays
 
 async function getStays(req, res) {
+  console.log('requested stays')
     try {
         var queryParams = req.query
         const stays = await stayService.query(queryParams)
