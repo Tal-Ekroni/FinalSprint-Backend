@@ -6,7 +6,7 @@ const ObjectId = require('mongodb').ObjectId
 async function query(filterBy) {
     console.log(filterBy)
     try {
-        const criteria = _buildCriteria(JSON.parse(filterBy))
+        const criteria = _buildCriteria(JSON.parse(filterBy.params))
         const collection = await dbService.getCollection('stay')
         var stays = await collection.find(criteria).toArray()
         console.log('stays', stays);
@@ -30,7 +30,7 @@ function _buildCriteria(filterBy) {
         criteria.amenities = { $regex: filterBy.amenities, $options: 'i' }
     }
     if (filterBy.uniqueStay) {
-        criteria.uniqueStay = JSON.parse(filterBy.uniqueStay)
+        criteria.uniqueStay = true
     }
     if (filterBy.capacity) {
         criteria.capacity = { $gt: +filterBy.capacity }
