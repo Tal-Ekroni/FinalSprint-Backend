@@ -27,7 +27,10 @@ function _buildCriteria(filterBy) {
         criteria.assetType = { $regex: filterBy.assetType, $options: 'i' }
     }
     if (filterBy.amenities) {
-        criteria.amenities = { $regex: filterBy.amenitiesm, $options: 'i' }
+        criteria.amenities = { $regex: filterBy.amenities, $options: 'i' }
+    }
+    if (filterBy.hostId) {
+        criteria = { 'host._id': ObjectId(userId) }
     }
     console.log(criteria)
     return criteria
