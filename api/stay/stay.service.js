@@ -4,12 +4,12 @@ const ObjectId = require('mongodb').ObjectId
 
 
 async function query(filterBy) {
-    console.log(filterBy)
     try {
-        const criteria = _buildCriteria(filterBy)
+        const criteria = _buildCriteria(JSON.parse(filterBy.params))
         const collection = await dbService.getCollection('stay')
         var stays = await collection.find(criteria).toArray()
-        console.log('stays', stays);
+        console.log('criteria', criteria);
+        console.log('stays', stays.length);
         return stays
     } catch (err) {
         console.log(err);
@@ -30,12 +30,18 @@ function _buildCriteria(filterBy) {
         criteria.amenities = { $regex: filterBy.amenities, $options: 'i' }
     }
     if (filterBy.hostId) {
-        criteria = { 'host._id': ObjectId(userId) }
+        criteria = { 'host._id': ObjectId(filterBy.hostId) }
+    }
+    if (filterBy.uniqueStay) {
+        criteria.uniqueStay = true
+    }
+    if (filterBy.capacity) {
+        criteria.capacity = { $gt: +filterBy.capacity }
     }
     console.log(criteria)
     return criteria
-}
 
+}
 
 async function getById(stayId) {
     try {
@@ -88,5 +94,5 @@ module.exports = {
     query,
     getById,
     add,
-    update,
+    update
 }
