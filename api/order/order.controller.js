@@ -4,10 +4,11 @@ const logger = require('../../services/logger.service.js')
 
 async function getOrdersById(req, res) {
   try {
-    console.log(req.query, 'hi')
-    const userId = req.query.userId;
-    const type = req.query.type
+    const userId = JSON.parse(req.query.params).userId;
+    const type = JSON.parse(req.query.params).type
+    // console.log(type, userId, 'userrrr');
     const order = await orderService.query(userId, type)
+    // await console.log(order, 'hi')
     res.json(order)
   } catch (err) {
     logger.error('Failed to get order', err)

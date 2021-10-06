@@ -7,7 +7,6 @@ const asyncLocalStorage = require('../../services/als.service')
 
 
 async function query(userId, type) {
-    console.log(userId, 'in query')
     try {
         const criteria = _buildCriteria(userId, type)
         const collection = await dbService.getCollection('order')
@@ -23,18 +22,8 @@ async function query(userId, type) {
 
 function _buildCriteria(userId, type) {
     let criteria = {}
-    if (type === 'host') {
-
-        if (userId) {
-            criteria = { 'host._id': ObjectId(userId) }
-        }
-    }
-    else {
-        if (userId) {
-            criteria = { 'buyer._id': ObjectId(userId) }
-        }
-    }
-    console.log(criteria)
+    if (type === 'host') criteria = { 'host._id': userId }
+    else criteria = { 'buyer._id': userId };
     return criteria
 }
 

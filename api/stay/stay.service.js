@@ -36,7 +36,6 @@ function _buildCriteria(filterBy) {
     if (filterBy.capacity) {
         criteria.capacity = { $gt: +filterBy.capacity }
     }
-    console.log(criteria)
     return criteria
 
 }
