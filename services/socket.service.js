@@ -14,13 +14,21 @@ function connectSockets(http, session) {
         socket.on('disconnect', socket => {
             console.log('Someone disconnected')
         })
-        socket.on('setHost', hostId => {
-            if (socket.myTopic === hostId) return;
+        socket.on('setUser', userId => {
+            if (socket.myTopic === userId) return;
             if (socket.myTopic) {
                 socket.leave(socket.myTopic)
             }
-            socket.join(hostId)
-            socket.myTopic = hostId
+            socket.join(userId)
+            socket.myTopic = userId
+        })
+        socket.on('setStay', stayId => {
+            if (socket.myTopic === stayId) return;
+            if (socket.myTopic) {
+                socket.leave(socket.myTopic)
+            }
+            socket.join(stayId)
+            socket.myTopic = stayId
         })
         socket.on('setNotif', notif => {
             console.log('Emitting Chat msg', notif);
