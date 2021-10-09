@@ -24,9 +24,9 @@ function connectSockets(http, session) {
         })
         socket.on('setStay', stayId => {
             if (socket.myTopic === stayId) return;
-            if (socket.myTopic) {
-                socket.leave(socket.myTopic)
-            }
+            // if (socket.myTopic) {
+            //     socket.leave(socket.myTopic)
+            // }
             socket.join(stayId)
             socket.myTopic = stayId
         })
