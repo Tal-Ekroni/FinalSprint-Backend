@@ -29,7 +29,7 @@ function _buildCriteria(filterBy) {
         criteria.amenities = { $regex: filterBy.amenities, $options: 'i' }
     }
     if (filterBy.hostId) {
-        criteria.host = { '_id': ObjectId(filterBy.hostId) }
+        criteria = { 'host._id': filterBy.hostId }
     }
     if (filterBy.uniqueStay) {
         criteria.uniqueStay = true
