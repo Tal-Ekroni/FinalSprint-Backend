@@ -21,13 +21,13 @@ function connectSockets(http, session) {
             socket.join(userId)
             socket.myTopic = userId
         })
-        socket.on('setStay', stayId => {
-            if (socket.myTopic === stayId) return;
+        socket.on('setHost', hotsId => {
+            if (socket.myTopic === hotsId) return;
             // if (socket.myTopic) {
             //     socket.leave(socket.myTopic)
             // }
-            socket.join(stayId)
-            socket.myTopic = stayId
+            socket.join(hotsId)
+            socket.myTopic = hotsId
         })
         socket.on('setNotif', notif => {
             console.log('Emitting Chat msg', notif);
