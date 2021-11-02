@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient
-
+const url = 'mongodb://localhost:27017'
 const config = require('../config')
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
 }
 
 // Database Name
-const dbName = 'Anygo_DB'
+const dbName = 'AnyGo'
 
 var dbConn = null
 
@@ -15,6 +15,7 @@ async function getCollection(collectionName) {
     try {
         const db = await connect()
         const collection = await db.collection(collectionName)
+        console.log('coll', collection);
         return collection
     } catch (err) {
         logger.error('Failed to get Mongo collection', err)
@@ -25,7 +26,7 @@ async function getCollection(collectionName) {
 async function connect() {
     if (dbConn) return dbConn
     try {
-        const client = await MongoClient.connect(config.dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
+        const client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
         const db = client.db(dbName)
         dbConn = db
         return db

@@ -8,6 +8,7 @@ async function query(filterBy) {
         const criteria = _buildCriteria(JSON.parse(filterBy.params))
         const collection = await dbService.getCollection('stay')
         var stays = await collection.find(criteria).toArray()
+        console.log('filterrrrrr', criteria);
         return stays
     } catch (err) {
         console.log(err);
@@ -27,14 +28,14 @@ function _buildCriteria(filterBy) {
     if (filterBy.amenities) {
         criteria.amenities = { $regex: filterBy.amenities, $options: 'i' }
     }
-    if (filterBy.hostId) {
-        criteria = { 'host._id': ObjectId(filterBy.hostId) }
-    }
     if (filterBy.uniqueStay) {
         criteria.uniqueStay = true
     }
     if (filterBy.capacity) {
         criteria.capacity = { $gt: +filterBy.capacity }
+    }
+    if (filterBy.hostId) {
+        criteria = { 'host._id': filterBy.hostId }
     }
     return criteria
 

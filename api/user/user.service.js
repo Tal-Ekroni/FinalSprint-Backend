@@ -92,14 +92,19 @@ async function update(user) {
 }
 
 async function add(user) {
+    const userToAdd = {
+        username: user.username,
+        fullname: user.fullname,
+        password: user.password,
+        isHost: user.isHost,
+        imgUrl: user.imgUrl,
+        myStays: user.myStays,
+        notifications: user.notifications,
+        mySaves: user.mySaves
+    }
+    console.log('user', userToAdd);
     try {
         // peek only updatable fields!
-        const userToAdd = {
-            username: user.username,
-            password: user.password,
-            fullname: user.fullname,
-            score: 100
-        }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)
         return userToAdd
