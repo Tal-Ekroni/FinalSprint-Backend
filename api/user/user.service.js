@@ -94,6 +94,7 @@ async function update(user) {
 async function add(user) {
     const userToAdd = {
         username: user.username,
+        email: user.email,
         fullname: user.fullname,
         password: user.password,
         isHost: user.isHost,
