@@ -76,11 +76,10 @@ async function add(stay) {
 }
 async function update(stay) {
     try {
-        var id = ObjectId(stay._id)
-        delete stay._id
+        const stayToSave = { ...stay, _id: ObjectId(stay._id) }
         const collection = await dbService.getCollection('stay')
-        await collection.updateOne({ "_id": id }, { $set: { ...stay } })
-        return stay
+        await collection.updateOne({ _id: stayToSave._id }, { $set: { ...stayToSave } })
+        return stayToSave
     } catch (err) {
         logger.error(`cannot update stay ${stayId}`, err)
         throw err

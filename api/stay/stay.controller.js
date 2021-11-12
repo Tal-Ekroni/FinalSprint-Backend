@@ -46,6 +46,7 @@ async function getStayById(req, res) {
     try {
       const stay = req.body;
       const updatedStay = await stayService.update(stay)
+      console.log('stayyy', updatedStay);
       res.json(updatedStay)
     } catch (err) {
       logger.error('Failed to update stay', err)
