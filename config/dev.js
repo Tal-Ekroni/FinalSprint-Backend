@@ -1,4 +1,4 @@
 module.exports = {
-  'dbURL': 'urlil',
-  //   'dbURL': 'mongodb+srv://liorle1997:l8111997@cluster0.o219y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  'dbURL':  'mongodb://localhost:27017',
+  // 'dbURL':  'mongodb+srv://idoel:ie3151995@cluster0.vfnjt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
 }
